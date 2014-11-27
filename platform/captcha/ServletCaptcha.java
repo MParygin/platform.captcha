@@ -16,6 +16,7 @@ public final class ServletCaptcha extends HttpServlet {
 
     private static String ATTRIBUTE = "check"; // name of session attribute for store the value of captcha
     private static String DICT = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789_";  // dictionary
+    private static int CHARS = 5;
     private static int WIDTH = 128; // width (pixels)
     private static int HEIGHT = 48; // height (pixels)
     private static int NOISE = 400; // noise points
@@ -36,9 +37,8 @@ public final class ServletCaptcha extends HttpServlet {
 
         // create text
         StringBuilder tmp = new StringBuilder();
-        for (int i = 0; i < 5; i++) {
-            int p = (int) (Math.random() * DICT.length());
-            tmp.append(DICT.charAt(p));
+        for (int i = 0; i < CHARS; i++) {
+            tmp.append(DICT.charAt((int) (Math.random() * DICT.length())));
         }
         session.setAttribute(ATTRIBUTE, tmp.toString());
 
